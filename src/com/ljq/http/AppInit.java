@@ -3,6 +3,7 @@ package com.ljq.http;
 import com.ljq.common.ProgramConfig;
 import com.ljq.core.CoreTranser;
 import com.ljq.core.TransHelper;
+import com.ljq.queue.SendTaskEntity;
 import com.ljq.schedule.ScheduleInfo;
 import com.ljq.schedule.ScheduleManager;
 import com.ljq.schedule.handler.DataFileCleanHandler;
@@ -59,7 +60,7 @@ public class AppInit extends HttpServlet{
 
         // 初始化定时清理作业
         ScheduleManager.registerTaskHandler(new DataFileCleanHandler());
-        ScheduleManager.engine().lauchTask(new ScheduleInfo(-999,ProgramConfig.TASK_TYPE_CLEAN,"0 28 17 * * ? *"));
+        ScheduleManager.engine().lauchTask(new ScheduleInfo(-999, ProgramConfig.TASK_TYPE_CLEAN, "0 06 17 * * ? *"));
 
         super.init();
     }

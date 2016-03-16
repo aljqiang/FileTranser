@@ -55,10 +55,10 @@ public class TranserScheduler extends Thread{
     @Override
     public void run(){
         try{
-            log.error("开始执行任务ID为:"+info.getTask_id()+",类型为:"+info.getTask_type()+"任务..");
+            log.info("开始执行任务ID为:"+info.getTask_id()+",类型为:"+info.getTask_type()+"任务..");
             ITaskHandler handler = ScheduleManager.getTaskHandler(info.getTask_type());
             handler.handle(info);
-            log.error("结束执行任务ID为:"+info.getTask_id()+",类型为:"+info.getTask_type()+"任务..");
+            log.info("结束执行任务ID为:"+info.getTask_id()+",类型为:"+info.getTask_type()+"任务..");
         }finally{
             //更改结束状态
             this.dead = true;

@@ -1,5 +1,6 @@
 package com.ljq.schedule.handler;
 
+import com.ljq.common.ConstantKey;
 import com.ljq.common.ProgramConfig;
 import com.ljq.core.TransHelper;
 import com.ljq.http.TestReciveOrderServlet;
@@ -26,7 +27,7 @@ public class XTaskHandlerImpl implements ITaskHandler {
     @Override
     public void handle(ScheduleInfo info) {
         int orderType = 1;
-        String dataFilePath = "D:/test";
+        String dataFilePath = ProgramConfig.X.getProperty(ConstantKey.transer_save_dir, "D:/aimDir/X/save/");
 
         for (int i = 0; i < 11; i++) {
             if (!TestReciveOrderServlet.checkOrderType(orderType)) {

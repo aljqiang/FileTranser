@@ -77,7 +77,7 @@ public class DataFileCleanHandler implements ITaskHandler {
 				this.fmt = new SimpleDateFormat("yyyyMMdd");
 				this.currDate = Integer.parseInt(fmt.format(new Date()));
 			}catch(Exception ex){
-				log.error("过期ufs数据文件初始化当前日期出错.",ex);
+				log.error("过期数据文件初始化当前日期出错.",ex);
 			}
 		}
 		

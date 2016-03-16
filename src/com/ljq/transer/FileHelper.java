@@ -5,6 +5,7 @@ import com.ljq.common.ProgramConfig;
 import com.ljq.gateway.SendFileResult;
 import com.ljq.transer.iml.XTaskInfoCreator;
 import com.ljq.transer.iml.YTaskInfoCreator;
+import com.ljq.util.FileTypeHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -54,7 +55,7 @@ public class FileHelper {
     }
 
     /**
-     * 创建UFS需要的文件路径和文件目录
+     * 创建需要的文件路径和文件目录
      *
      * @param dataFilePath
      * @return
@@ -83,23 +84,28 @@ public class FileHelper {
             for (int i = 0; i < str.length; i++) {
 
                 File dataFile = new File(str[i]);
-                File destFile = new File(taskInfo.getSrcDir() + taskInfo.getSrcFile() + "_" + numFmt.format(seqNum) + ".txt");
-                fileName[i] = taskInfo.getSrcFile() + "_" + numFmt.format(seqNum) + ".txt";
 
-                log.info("开始将数据文件:[" + dataFile.getAbsolutePath() + "]转移到目录[" + destFile.getAbsolutePath() + "]");
-                //dataFile.renameTo(destFile);
-                boolean result = FileHelper.copy(dataFile, destFile);
-                if (!result) {
-                    sendResult.setType("Transer传输");
-                    sendResult.setMsg("转移数据文件:[" + dataFile.getAbsolutePath() + "]失败");
-                    log.debug("转移数据文件:[" + dataFile.getAbsolutePath() + "]失败");
-                    log.debug(sendResult.getMsg());
-                }else{
-                    sendResult.setSuccess(true);
-                    sendResult.setType("Transer传输");
+                // 判断文件是否为指定类型文件
+                if(dataFile.exists() && "pdf".equals(FileTypeHelper.getFileByFile(dataFile)) ){
+                    File destFile = new File(taskInfo.getSrcDir() + taskInfo.getSrcFile() + "_" + numFmt.format(seqNum) + ".pdf");
+                    fileName[i] = taskInfo.getSrcFile() + "_" + numFmt.format(seqNum) + ".pdf";
+
+                    log.info("开始将数据文件:[" + dataFile.getAbsolutePath() + "]转移到目录[" + destFile.getAbsolutePath() + "]");
+                    //dataFile.renameTo(destFile);
+                    boolean result = FileHelper.copy(dataFile, destFile);
+                    if (!result) {
+                        sendResult.setType("Transer传输");
+                        sendResult.setMsg("转移数据文件:[" + dataFile.getAbsolutePath() + "]失败");
+                        log.debug("转移数据文件:[" + dataFile.getAbsolutePath() + "]失败");
+                        log.debug(sendResult.getMsg());
+                    }else{
+                        sendResult.setSuccess(true);
+                        sendResult.setType("Transer传输");
+                    }
+
+                    seqNum++;
                 }
 
-                seqNum++;
             }
 
             taskInfo.setSrcFiles(fileName);
