@@ -2,6 +2,7 @@ package com.ljq.transer.iml;
 
 import com.ljq.common.ConstantKey;
 import com.ljq.common.ProgramConfig;
+import com.ljq.queue.FileEntity;
 import com.ljq.transer.ACreateTaskInfo;
 import com.ljq.transer.FileTaskInfo;
 
@@ -31,7 +32,7 @@ public class YTaskInfoCreator extends ACreateTaskInfo {
     }
 
     @Override
-    public FileTaskInfo createTaskInfo() {
+    public FileTaskInfo createTaskInfo(FileEntity fileEntity) {
         FileTaskInfo info = new FileTaskInfo();
         //创建当前日期标识
         String dateStr = this.dateFmt.format(new Date());

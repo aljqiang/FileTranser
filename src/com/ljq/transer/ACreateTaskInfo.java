@@ -1,5 +1,7 @@
 package com.ljq.transer;
 
+import com.ljq.queue.FileEntity;
+
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
@@ -36,5 +38,5 @@ public abstract class ACreateTaskInfo {
     /**
      * 生成任务信息
      */
-    public abstract FileTaskInfo createTaskInfo();
+    public abstract FileTaskInfo createTaskInfo(FileEntity fileEntity);
 }

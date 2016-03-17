@@ -3,6 +3,7 @@ package com.ljq.transer;
 import com.ljq.common.ConstantKey;
 import com.ljq.common.ProgramConfig;
 import com.ljq.gateway.SendFileResult;
+import com.ljq.queue.FileEntity;
 import com.ljq.transer.iml.XTaskInfoCreator;
 import com.ljq.transer.iml.YTaskInfoCreator;
 import com.ljq.util.FileTypeHelper;
@@ -62,20 +63,12 @@ public class FileHelper {
      */
     public static FileTaskInfo createTaskInfo(int taskType, String dataFilePath,SendFileResult sendResult) {
 
-        // 获取发送文件参数
-        FileTaskInfo taskInfo = FileHelper.taskInfoCreator.get(taskType).createTaskInfo();
+        // 获取文件参数
+        FileTaskInfo taskInfo = null;
+
+        FileEntity fileEntity=new FileEntity();
 
         if (taskType == ProgramConfig.TASK_TYPE_X) {
-
-            int seqNum;  // 任务类型流水号
-
-            int fileCount = new File(taskInfo.getSrcDir()).listFiles().length;
-
-            if (fileCount > 0) {
-                seqNum = FileHelper.fileReader(taskInfo.getSrcDir()).length + 1;
-            } else {
-                seqNum = 1;
-            }
 
             String[] str = FileHelper.fileReader(dataFilePath);
 
@@ -87,6 +80,38 @@ public class FileHelper {
 
                 // 判断文件是否为指定类型文件
                 if(dataFile.exists() && "pdf".equals(FileTypeHelper.getFileByFile(dataFile)) ){
+
+                    String fName = dataFile.getName();
+
+                    int dot = fName.lastIndexOf('.');
+
+                    if ((dot >-1) && (dot < (fName.length()))) {
+                        String subFileName = fName.substring(0, dot);
+                        String[] fileNameSplit = subFileName.split("-");
+
+                        for (int j = 0; j < fileNameSplit.length; j++) {
+                            if (j == 0) {
+                                fileEntity.setKhh(fileNameSplit[j]);
+                            } else if (j == 1) {
+                                fileEntity.setRq(fileNameSplit[j]);
+                            } else {
+                                fileEntity.setKhzh(fileNameSplit[j]);
+                            }
+                        }
+                    }
+
+                    taskInfo = FileHelper.taskInfoCreator.get(taskType).createTaskInfo(fileEntity);
+
+                    int seqNum;  // 任务类型流水号
+
+                    int fileCount = new File(taskInfo.getSrcDir()).listFiles().length;
+
+                    if (fileCount > 0) {
+                        seqNum = FileHelper.fileReader(taskInfo.getSrcDir()).length + 1;
+                    } else {
+                        seqNum = 1;
+                    }
+
                     File destFile = new File(taskInfo.getSrcDir() + taskInfo.getSrcFile() + "_" + numFmt.format(seqNum) + ".pdf");
                     fileName[i] = taskInfo.getSrcFile() + "_" + numFmt.format(seqNum) + ".pdf";
 

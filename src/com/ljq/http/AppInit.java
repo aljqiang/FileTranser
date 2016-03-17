@@ -29,7 +29,7 @@ public class AppInit extends HttpServlet{
 
     @Override
     public void init() throws ServletException {
-        log.info("程序初始化。。。");
+        log.info("初始化：正在进行系统初始化......");
 
         // 初始化程序环境配置
         ProgramConfig.init();
@@ -60,9 +60,14 @@ public class AppInit extends HttpServlet{
 
         // 初始化定时清理作业
         ScheduleManager.registerTaskHandler(new DataFileCleanHandler());
-        ScheduleManager.engine().lauchTask(new ScheduleInfo(-999, ProgramConfig.TASK_TYPE_CLEAN, "0 06 17 * * ? *"));
+//        ScheduleManager.engine().lauchTask(new ScheduleInfo(-999, ProgramConfig.TASK_TYPE_CLEAN, "0 06 17 * * ? *"));
+
+        // 初始化定时文件迁移作业
+        ScheduleManager.engine().lauchTask(new ScheduleInfo(001, ProgramConfig.TASK_TYPE_X, "0 05 16 * * ? *"));
 
         super.init();
+
+        log.info("初始化：系统初始化完成!");
     }
 
     @Override

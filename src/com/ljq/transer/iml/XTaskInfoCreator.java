@@ -2,6 +2,7 @@ package com.ljq.transer.iml;
 
 import com.ljq.common.ConstantKey;
 import com.ljq.common.ProgramConfig;
+import com.ljq.queue.FileEntity;
 import com.ljq.transer.ACreateTaskInfo;
 import com.ljq.transer.FileTaskInfo;
 
@@ -23,23 +24,23 @@ public class XTaskInfoCreator extends ACreateTaskInfo {
     }
 
     public XTaskInfoCreator(){
-        String dir = ProgramConfig.X.getProperty(ConstantKey.transer_send_dir, "Z:/aimDir/X/save/") +
-                ProgramConfig.X.getProperty(ConstantKey.transer_task_seq, "90001") + "/";
-        File dirFolder = new File(dir);
-        if(!dirFolder.exists())
-            dirFolder.mkdirs();
+//        String dir = ProgramConfig.X.getProperty(ConstantKey.transer_send_dir, "Z:/aimDir/X/save/") +
+//                ProgramConfig.X.getProperty(ConstantKey.transer_task_seq, "90001") + "/";
+//        File dirFolder = new File(dir);
+//        if(!dirFolder.exists())
+//            dirFolder.mkdirs();
     }
 
     @Override
-    public FileTaskInfo createTaskInfo() {
+    public FileTaskInfo createTaskInfo(FileEntity fileEntity) {
         FileTaskInfo info = new FileTaskInfo();
-        //创建当前日期标识
+        // 创建当前日期标识
         String dateStr = this.dateFmt.format(new Date());
-        //构造源系统发送路径
-        String srcDir = ProgramConfig.X.getProperty(ConstantKey.transer_send_dir, "D:/aimDir/X/save/") +
-                ProgramConfig.X.getProperty(ConstantKey.transer_task_seq, "90001") + "/" +
-                dateStr + "/";
-        //判断是否需要创建发送目录
+        // 构造目标文件存放目录
+        String srcDir = ProgramConfig.X.getProperty(ConstantKey.transer_save_dir, "D:/CRM_JD_FILE/") +
+                fileEntity.getKhh() + "/" +
+                fileEntity.getRq() + "/";
+        // 判断是否需要创建发送目录
         synchronized(this.dateFmt){
             File srcDirFolder = new File(srcDir);
             if(!srcDirFolder.exists())
@@ -58,8 +59,8 @@ public class XTaskInfoCreator extends ACreateTaskInfo {
                 this.seqNum = 0;
             this.seqNum++;
 
-            String srcFileName = ProgramConfig.X.getProperty(ConstantKey.transer_file_name, "TRANSER_X_")+
-                    ProgramConfig.X.getProperty(ConstantKey.transer_task_seq, "90001") + "_" + dateStr;
+            String srcFileName = ProgramConfig.X.getProperty(ConstantKey.transer_file_name, "ZTGJ")+
+                    fileEntity.getKhh() + "_" + fileEntity.getRq();
             info.setSrcFile(srcFileName);
             info.setAimFile(srcFileName);
 

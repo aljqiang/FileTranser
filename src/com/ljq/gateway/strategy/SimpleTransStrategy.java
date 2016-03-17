@@ -72,7 +72,7 @@ public class SimpleTransStrategy implements ITransStrategy {
         msg += "执行结果:"+((entity.getResult()== IConnectorResponse.RESULT_SUCCESS)?"成功":"失败")+"\r\n";
         msg += "源路径:"+entity.getSrcDir()+"\r\n";
         msg += "文件名称:" + entity.getFileName()+ "\r\n";
-        msg += "==============================\r\n";
+        msg += "====================================\r\n";
         log.info(msg);
     }
 }
