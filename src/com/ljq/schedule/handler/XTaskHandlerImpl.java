@@ -9,6 +9,7 @@ import com.ljq.schedule.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -33,6 +34,15 @@ public class XTaskHandlerImpl implements ITaskHandler {
         SimpleDateFormat dateFmt = new SimpleDateFormat("yyyyMMdd");
         String dateStr = dateFmt.format(new Date());
         String dataFilePath = ProgramConfig.X.getProperty(ConstantKey.transer_send_dir, "Z:/file_jd/") + dateStr + "/";
+
+        File file = new File(dataFilePath);
+        if (file.isDirectory()) {
+            String[] files = file.list();
+            if (files.length < 2) {
+                log.info("源系统文件路径:["+dataFilePath+"]无结单文件!");
+                return;
+            }
+        }
 
         if (!TestReciveOrderServlet.checkOrderType(orderType)) {
             log.debug("不能识别的发送任务类型.");
