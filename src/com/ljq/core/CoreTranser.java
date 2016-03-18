@@ -21,13 +21,13 @@ public class CoreTranser {
     private static CoreTranser transer;
 
     /**
-     * X工作线程记录量
+     * PDF文件传输工作线程记录量
      */
     private Integer pdfWorkerCnt = 0;
     private Object pdfWorkerCntLock = new Object();
 
     /**
-     * X工作线程最大限制
+     * PDF文件传输工作线程最大限制
      */
     private int PDF_WORKER_LOAD;
 
@@ -59,7 +59,7 @@ public class CoreTranser {
     }
 
     /**
-     * 开始轮询X任务队列
+     * 开始轮询PDF文件传输任务队列
      */
     public void runPdfSchedule(){
         log.info("##########开始轮询结单文件传输任务队列##########");
@@ -109,7 +109,7 @@ public class CoreTranser {
     }
 
     /**
-     * 判断X负载情况
+     * 判断PDF文件传输负载情况
      * @return
      */
     public boolean checkPdfLoad(){
@@ -147,7 +147,7 @@ public class CoreTranser {
     }
 
     /**
-     * 改动当前X工作线程数记录
+     * 改动当前PDF文件传输工作线程数记录
      */
     public void decreasePdfCnt(){
         synchronized(transer.pdfWorkerCntLock){
@@ -158,7 +158,7 @@ public class CoreTranser {
     }
 
     /**
-     * 显示当前X执行情况.
+     * 显示当前PDF文件传输执行情况.
      */
     public int showPdfWorkerCnt(){
         int cntResult = 0;
