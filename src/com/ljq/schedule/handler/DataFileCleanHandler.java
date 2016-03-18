@@ -61,7 +61,7 @@ public class DataFileCleanHandler implements ITaskHandler {
 	}
 	
 	/**
-	 * UFS文件特征搜索器
+	 * 文件特征搜索器
 	 * @author 翻书侠
 	 *
 	 */
@@ -102,7 +102,7 @@ public class DataFileCleanHandler implements ITaskHandler {
 	}
 	
 	/**
-	 * UFS数据文件处理器
+	 * 数据文件处理器
 	 * @author 翻书侠
 	 *
 	 */

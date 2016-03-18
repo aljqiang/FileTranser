@@ -38,7 +38,7 @@ public class SimpleTransStrategy implements ITransStrategy {
         //初始化发送结果
         SendFileResult sendResult = new SendFileResult();
 
-        //发送文件到UFS文件服务器
+        //发送文件到文件服务器
         log.info("开始调用API发送,任务类型为:" + entity.getTaskType() + ",文件目录为:" + entity.getSrcDir() + "");
         FileTaskInfo fileTaskInfo = FileHelper.createTaskInfo(entity.getTaskType(), entity.getSrcDir(),sendResult);
 
