@@ -164,7 +164,7 @@ public class CoreTranser {
         int cntResult = 0;
         synchronized(transer.pdfWorkerCntLock){
             cntResult = (((transer.pdfWorkerCnt-1)<0)?0:(transer.pdfWorkerCnt-1));
-            log.debug("当前系统还有["+cntResult+"]个X发送任务正在执行.");
+            log.debug("当前系统还有["+cntResult+"]个结单文件发送任务正在执行.");
         }
         return cntResult;
     }
