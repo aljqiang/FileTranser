@@ -62,7 +62,7 @@ public class CoreTranser {
      * 开始轮询X任务队列
      */
     public void runPdfSchedule(){
-        log.info("##########开始轮询X任务队列##########");
+        log.info("##########开始轮询结单文件传输任务队列##########");
         TaskQueueScheduler pdfScheduler = new TaskQueueScheduler(
                 Double.parseDouble(ProgramConfig.PDF.getProperty(ConstantKey.send_loop_delay,"3")),
                 ProgramConfig.TASK_TYPE_PDF,

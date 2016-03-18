@@ -50,7 +50,7 @@ public class AppInit extends HttpServlet{
 
         // 初始化通讯程序工作线程
         transer.runPdfSchedule();
-        transer.runYSchedule();
+//        transer.runYSchedule();
 
         // 装载X与Y任务处理器
         ScheduleManager.registerTaskHandler(new PdfTaskHandlerImpl());
@@ -61,7 +61,7 @@ public class AppInit extends HttpServlet{
 //        ScheduleManager.engine().lauchTask(new ScheduleInfo(-999, ProgramConfig.TASK_TYPE_CLEAN, "0 06 17 * * ? *"));
 
         // 初始化定时文件迁移作业
-        ScheduleManager.engine().lauchTask(new ScheduleInfo(999, ProgramConfig.TASK_TYPE_PDF, "0 29 14 * * ? *"));
+        ScheduleManager.engine().lauchTask(new ScheduleInfo(999, ProgramConfig.TASK_TYPE_PDF, "0 25 15 * * ? *"));
 
         super.init();
 
