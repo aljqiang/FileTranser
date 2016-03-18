@@ -37,10 +37,11 @@ public class SimpleTransStrategy implements ITransStrategy {
         SendFileResult sendResult = new SendFileResult();
 
         //发送文件到UFS文件服务器
-        log.info("开始调用API发送,任务类型为:"+entity.getTaskType()+",文件目录为:"+entity.getSrcDir()+"");
+        log.info("开始调用API发送,任务类型为:" + entity.getTaskType() + ",文件目录为:" + entity.getSrcDir() + "");
         FileTaskInfo fileTaskInfo = FileHelper.createTaskInfo(entity.getTaskType(), entity.getSrcDir(),sendResult);
 
-        entity.setFileName(fileTaskInfo.getAimFile());
+        entity.setFileName(fileTaskInfo.getSrcFile());
+        entity.setAimDir(ProgramConfig.X.getProperty(ConstantKey.transer_save_dir, "D:/CRM_JD_FILE/"));
 
         //返回结果
         return sendResult;
@@ -70,8 +71,8 @@ public class SimpleTransStrategy implements ITransStrategy {
         String msg = "\r\n==========发送完成信息==============\r\n";
         msg += "传输任务类型:"+taskType+"\r\n";
         msg += "执行结果:"+((entity.getResult()== IConnectorResponse.RESULT_SUCCESS)?"成功":"失败")+"\r\n";
-        msg += "源路径:"+entity.getSrcDir()+"\r\n";
-        msg += "文件名称:" + entity.getFileName()+ "\r\n";
+        msg += "目标文件发送路径:"+entity.getSrcDir()+"\r\n";
+        msg += "源文件存放路径:" + entity.getAimDir()+ "\r\n";
         msg += "====================================\r\n";
         log.info(msg);
     }

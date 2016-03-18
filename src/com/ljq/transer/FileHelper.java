@@ -129,8 +129,6 @@ public class FileHelper {
                     }
 
                     seqNum++;
-                }else{
-                    log.info("源系统文件路径:["+dataFilePath+"]无结单文件!");
                 }
             }
 

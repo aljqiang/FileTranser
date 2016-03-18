@@ -13,8 +13,9 @@ import java.util.Date;
  */
 
 public class SendTaskEntity extends ATaskEntity{
-    private String srcDir;  // 源WEB系统的文件路径
-    private String fileName;  // UFS传送文件名
+    private String srcDir;  // 源系统的文件路径
+    private String aimDir;  // 目标系统的文件路径
+    private String fileName;  // 传送文件名
     private int taskType;  // 任务类型
     private Date planSendTime;  // 计划发送时间
     private Date sendTime;  // 实际发送时间
@@ -47,7 +48,7 @@ public class SendTaskEntity extends ATaskEntity{
         msg += "执行结果:" + ((this.result == 0) ? "成功" : "失败") + "\r\n";
         msg += "错误描述:" + this.errCode + "," + this.errCause + "\r\n";
         msg += "源路径:" + this.srcDir + "\r\n";
-        msg += "文件名称:" + this.fileName + "\r\n";
+//        msg += "文件名称:" + this.fileName + "\r\n";
         msg += "========================\r\n";
 
         return msg;
@@ -139,6 +140,14 @@ public class SendTaskEntity extends ATaskEntity{
 
     public void setRespCode(String respCode) {
         this.respCode = respCode;
+    }
+
+    public String getAimDir() {
+        return aimDir;
+    }
+
+    public void setAimDir(String aimDir) {
+        this.aimDir = aimDir;
     }
 
     @Override

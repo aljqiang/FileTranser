@@ -36,7 +36,7 @@ public class XTaskInfoCreator extends ACreateTaskInfo {
         FileTaskInfo info = new FileTaskInfo();
         // 创建当前日期标识
         String dateStr = this.dateFmt.format(new Date());
-        // 构造目标文件存放目录
+        // 构造源文件存放目录
         String srcDir = ProgramConfig.X.getProperty(ConstantKey.transer_save_dir, "D:/CRM_JD_FILE/") +
                 fileEntity.getKhh() + "/" +
                 fileEntity.getRq() + "/";
@@ -48,12 +48,10 @@ public class XTaskInfoCreator extends ACreateTaskInfo {
             this.dateFmt.notifyAll();
         }
         info.setSrcDir(srcDir);
-        //构造目标系统接收路径
-        String aimDir = ProgramConfig.X.getProperty(ConstantKey.transer_save_dir, "D:/aimDir/X/save/") +
-                ProgramConfig.X.getProperty(ConstantKey.transer_task_seq, "90001") + "/" +
-                dateStr + "/";
+        // 构造目标系统发送目录
+        String aimDir = ProgramConfig.X.getProperty(ConstantKey.transer_send_dir, "Z:/JD/") + dateStr + "/";
         info.setAimDir(aimDir);
-        //构造源系统发送文件名
+        // 构造源系统存放文件名
         synchronized(this.numFmt){
             if(this.seqNum >= this.MAX_SEQ_NUM)
                 this.seqNum = 0;

@@ -63,7 +63,7 @@ public class AppInit extends HttpServlet{
 //        ScheduleManager.engine().lauchTask(new ScheduleInfo(-999, ProgramConfig.TASK_TYPE_CLEAN, "0 06 17 * * ? *"));
 
         // 初始化定时文件迁移作业
-        ScheduleManager.engine().lauchTask(new ScheduleInfo(001, ProgramConfig.TASK_TYPE_X, "0 05 16 * * ? *"));
+        ScheduleManager.engine().lauchTask(new ScheduleInfo(999, ProgramConfig.TASK_TYPE_X, "0 20 10 * * ? *"));
 
         super.init();
 
