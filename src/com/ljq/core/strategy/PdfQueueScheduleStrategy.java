@@ -15,14 +15,14 @@ import org.apache.commons.logging.LogFactory;
  * Version: 1.0
  */
 
-public class XQueueScheduleStrategy implements IQueueScheduleStrategy {
-    private static Log log= LogFactory.getLog(XQueueScheduleStrategy.class);
+public class PdfQueueScheduleStrategy implements IQueueScheduleStrategy {
+    private static Log log= LogFactory.getLog(PdfQueueScheduleStrategy.class);
 
     @Override
     public void addTaskEntity(ATaskEntity entity) {
         TransHelper.transer()
                 .taskQueue()
-                .xTaskQueue()
+                .pdfTaskQueue()
                 .addQueueElement((SendTaskEntity) entity);
     }
 
@@ -30,14 +30,14 @@ public class XQueueScheduleStrategy implements IQueueScheduleStrategy {
     public QueueScheduleResult canSend() {
         QueueScheduleResult result = new QueueScheduleResult();
         // 从队列获取任务
-        if(TransHelper.transer().checkXLoad()){
+        if(TransHelper.transer().checkPdfLoad()){
             SendTaskEntity task = TransHelper.transer()
                     .taskQueue()
-                    .xTaskQueue()
+                    .pdfTaskQueue()
                     .getQueueElement();
             result.setStatus((task!=null));
             if(!result.canSend()){
-                TransHelper.transer().decreaseXCnt();
+                TransHelper.transer().decreasePdfCnt();
             }else{
                 result.setTaskEntity(task);
             }

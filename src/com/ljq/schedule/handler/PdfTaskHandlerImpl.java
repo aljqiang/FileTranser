@@ -20,12 +20,12 @@ import java.util.Date;
  * Version: 1.0
  */
 
-public class XTaskHandlerImpl implements ITaskHandler {
-    private static Log log = LogFactory.getLog(XTaskHandlerImpl.class);
+public class PdfTaskHandlerImpl implements ITaskHandler {
+    private static Log log = LogFactory.getLog(PdfTaskHandlerImpl.class);
 
     @Override
     public Integer getTaskType() {
-        return ProgramConfig.TASK_TYPE_X;
+        return ProgramConfig.TASK_TYPE_PDF;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class XTaskHandlerImpl implements ITaskHandler {
         int orderType = 1;
         SimpleDateFormat dateFmt = new SimpleDateFormat("yyyyMMdd");
         String dateStr = dateFmt.format(new Date());
-        String dataFilePath = ProgramConfig.X.getProperty(ConstantKey.transer_send_dir, "Z:/file_jd/") + dateStr + "/";
+        String dataFilePath = ProgramConfig.PDF.getProperty(ConstantKey.transer_send_dir, "Z:/file_jd/") + dateStr + "/";
 
         File file = new File(dataFilePath);
         if (file.isDirectory()) {

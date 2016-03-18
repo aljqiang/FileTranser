@@ -38,7 +38,7 @@ public class SendTaskEntity extends ATaskEntity{
         String msg = "\r\n========================\r\n";
         String taskType=null;
 
-        if(this.taskType== ProgramConfig.TASK_TYPE_X){
+        if(this.taskType== ProgramConfig.TASK_TYPE_PDF){
             taskType="X";
         }else{
             taskType="Y";

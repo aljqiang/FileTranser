@@ -13,12 +13,12 @@ import java.util.Properties;
 
 public class ProgramConfig {
     public static Properties GATEWAY = null;
-    public static Properties X = null;
+    public static Properties PDF = null;
     public static Properties Y = null;
 
     public static void init(){
         GATEWAY = new Properties();
-        X = new Properties();
+        PDF = new Properties();
         Y = new Properties();
         try {
             /**
@@ -29,7 +29,7 @@ public class ProgramConfig {
             /**
              * X系统通信配置
              */
-            X.load(ProgramConfig.class.getResourceAsStream("/gateway.x.properties"));
+            PDF.load(ProgramConfig.class.getResourceAsStream("/gateway.pdf.properties"));
 
             /**
              * Y系统通信配置
@@ -43,8 +43,8 @@ public class ProgramConfig {
     /**
      * 系统接收任务类型
      */
-    public static final Integer TASK_TYPE_X=1;
+    public static final Integer TASK_TYPE_PDF=1;
     public static final Integer TASK_TYPE_Y=2;
     public static final Integer TASK_TYPE_CLEAN=0;
-    public static final Integer[] TASK_TYPE={TASK_TYPE_X,TASK_TYPE_Y,TASK_TYPE_CLEAN};
+    public static final Integer[] TASK_TYPE={TASK_TYPE_PDF,TASK_TYPE_Y,TASK_TYPE_CLEAN};
 }

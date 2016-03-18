@@ -17,13 +17,13 @@ import java.util.Date;
  * Version: 1.0
  */
 
-public class XTaskInfoCreator extends ACreateTaskInfo {
+public class PdfTaskInfoCreator extends ACreateTaskInfo {
     @Override
     public int getTaskType() {
-        return ProgramConfig.TASK_TYPE_X;
+        return ProgramConfig.TASK_TYPE_PDF;
     }
 
-    public XTaskInfoCreator(){
+    public PdfTaskInfoCreator(){
 //        String dir = ProgramConfig.X.getProperty(ConstantKey.transer_send_dir, "Z:/aimDir/X/save/") +
 //                ProgramConfig.X.getProperty(ConstantKey.transer_task_seq, "90001") + "/";
 //        File dirFolder = new File(dir);
@@ -37,7 +37,7 @@ public class XTaskInfoCreator extends ACreateTaskInfo {
         // 创建当前日期标识
         String dateStr = this.dateFmt.format(new Date());
         // 构造源文件存放目录
-        String srcDir = ProgramConfig.X.getProperty(ConstantKey.transer_save_dir, "D:/CRM_JD_FILE/") +
+        String srcDir = ProgramConfig.PDF.getProperty(ConstantKey.transer_save_dir, "D:/CRM_JD_FILE/") +
                 fileEntity.getKhh() + "/" +
                 fileEntity.getRq() + "/";
         // 判断是否需要创建发送目录
@@ -49,7 +49,7 @@ public class XTaskInfoCreator extends ACreateTaskInfo {
         }
         info.setSrcDir(srcDir);
         // 构造目标系统发送目录
-        String aimDir = ProgramConfig.X.getProperty(ConstantKey.transer_send_dir, "Z:/JD/") + dateStr + "/";
+        String aimDir = ProgramConfig.PDF.getProperty(ConstantKey.transer_send_dir, "Z:/JD/") + dateStr + "/";
         info.setAimDir(aimDir);
         // 构造源系统存放文件名
         synchronized(this.numFmt){
@@ -57,7 +57,7 @@ public class XTaskInfoCreator extends ACreateTaskInfo {
                 this.seqNum = 0;
             this.seqNum++;
 
-            String srcFileName = ProgramConfig.X.getProperty(ConstantKey.transer_file_name, "ZTGJ")+
+            String srcFileName = ProgramConfig.PDF.getProperty(ConstantKey.transer_file_name, "ZTGJ")+
                     fileEntity.getKhh() + "_" + fileEntity.getRq();
             info.setSrcFile(srcFileName);
             info.setAimFile(srcFileName);

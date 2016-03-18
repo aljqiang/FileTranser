@@ -110,7 +110,7 @@ public class FileWalker {
 	
 	/**
 	 * 扫描指定文件实例
-	 * @param file
+	 * @param
 	 */
 	public void scanFileInstance(File instance){
 		if(instance.isDirectory())
@@ -127,7 +127,7 @@ public class FileWalker {
 	
 	/**
 	 * 遍历指定目录
-	 * @param file
+	 * @param
 	 */
 	public void listAimFolder(File folder){
 		for(File childFile:folder.listFiles())

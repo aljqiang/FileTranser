@@ -11,7 +11,7 @@ package com.ljq.queue;
 public class TaskEntityQueue {
     private static TaskEntityQueue taskQueue;
 
-    private final BlockQueue<SendTaskEntity> xtaskQueue = new BlockQueue<SendTaskEntity>();
+    private final BlockQueue<SendTaskEntity> pdftaskQueue = new BlockQueue<SendTaskEntity>();
     private final BlockQueue<SendTaskEntity> ytaskQueue = new BlockQueue<SendTaskEntity>();
 
     private TaskEntityQueue(){
@@ -31,8 +31,8 @@ public class TaskEntityQueue {
      * 获取X任务队列
      * @return
      */
-    public BlockQueue<SendTaskEntity> xTaskQueue(){
-        return this.xtaskQueue;
+    public BlockQueue<SendTaskEntity> pdfTaskQueue(){
+        return this.pdftaskQueue;
     }
 
     /**

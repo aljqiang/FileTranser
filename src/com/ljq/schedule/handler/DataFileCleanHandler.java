@@ -33,8 +33,8 @@ public class DataFileCleanHandler implements ITaskHandler {
 
 	public DataFileCleanHandler(){
 
-		String x_dir = ProgramConfig.X.getProperty(ConstantKey.transer_send_dir, "D:/aimDir/X/save/") +
-                ProgramConfig.X.getProperty(ConstantKey.transer_task_seq, "90001") + "/";
+		String x_dir = ProgramConfig.PDF.getProperty(ConstantKey.transer_send_dir, "D:/aimDir/X/save/") +
+                ProgramConfig.PDF.getProperty(ConstantKey.transer_task_seq, "90001") + "/";
 		String y_dir = ProgramConfig.Y.getProperty(ConstantKey.transer_send_dir, "D:/aimDir/Y/save/") +
                 ProgramConfig.Y.getProperty(ConstantKey.transer_task_seq, "90002") + "/";
 		

@@ -1,7 +1,7 @@
 package com.ljq.core;
 
 import com.ljq.common.ProgramConfig;
-import com.ljq.core.strategy.XQueueScheduleStrategy;
+import com.ljq.core.strategy.PdfQueueScheduleStrategy;
 import com.ljq.core.strategy.YQueueScheduleStrategy;
 import com.ljq.gateway.strategy.SimpleTransStrategy;
 
@@ -46,10 +46,10 @@ public class TransHelper {
      * 初始化
      */
     public static void init(){
-        TransHelper.registerTransStrategy(ProgramConfig.TASK_TYPE_X, new SimpleTransStrategy(ProgramConfig.TASK_TYPE_X));
+        TransHelper.registerTransStrategy(ProgramConfig.TASK_TYPE_PDF, new SimpleTransStrategy(ProgramConfig.TASK_TYPE_PDF));
         TransHelper.registerTransStrategy(ProgramConfig.TASK_TYPE_Y, new SimpleTransStrategy(ProgramConfig.TASK_TYPE_Y));
 
-        TransHelper.registerScheduleStrategy(ProgramConfig.TASK_TYPE_X, new XQueueScheduleStrategy());
+        TransHelper.registerScheduleStrategy(ProgramConfig.TASK_TYPE_PDF, new PdfQueueScheduleStrategy());
         TransHelper.registerScheduleStrategy(ProgramConfig.TASK_TYPE_Y, new YQueueScheduleStrategy());
     }
 

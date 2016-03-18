@@ -1,7 +1,7 @@
 package com.ljq.queue;
 
 /**
- * 文件实体类
+ * 文件日志表实体类
  * User: Larry
  * Date: 2016-03-17
  * Time: 10:35

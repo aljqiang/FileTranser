@@ -43,7 +43,7 @@ public class SimpleTransStrategy implements ITransStrategy {
         FileTaskInfo fileTaskInfo = FileHelper.createTaskInfo(entity.getTaskType(), entity.getSrcDir(),sendResult);
 
         entity.setFileName(fileTaskInfo.getSrcFile());
-        entity.setAimDir(ProgramConfig.X.getProperty(ConstantKey.transer_save_dir, "D:/CRM_JD_FILE/"));
+        entity.setAimDir(ProgramConfig.PDF.getProperty(ConstantKey.transer_save_dir, "D:/CRM_JD_FILE/"));
 
         //返回结果
         return sendResult;
@@ -51,9 +51,9 @@ public class SimpleTransStrategy implements ITransStrategy {
 
     @Override
     public void release() {
-        if(taskType == ProgramConfig.TASK_TYPE_X){
-            TransHelper.transer().decreaseXCnt();
-            TransHelper.transer().showXWorkerCnt();
+        if(taskType == ProgramConfig.TASK_TYPE_PDF){
+            TransHelper.transer().decreasePdfCnt();
+            TransHelper.transer().showPdfWorkerCnt();
         }else if(taskType == ProgramConfig.TASK_TYPE_Y){
             TransHelper.transer().decreaseYCnt();
             TransHelper.transer().showYWorkerCnt();
@@ -64,8 +64,8 @@ public class SimpleTransStrategy implements ITransStrategy {
     public void complete(SendTaskEntity entity) throws Exception {
         String taskType=null;
 
-        if(this.taskType==ProgramConfig.TASK_TYPE_X){
-            taskType="X";
+        if(this.taskType==ProgramConfig.TASK_TYPE_PDF){
+            taskType="结单文件传输";
         }else if(this.taskType==ProgramConfig.TASK_TYPE_Y){
             taskType="Y";
         }

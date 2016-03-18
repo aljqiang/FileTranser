@@ -39,7 +39,7 @@ public class ReciveOrderScheduleServlet extends HttpServlet{
         String date=req.getParameter("date");
         String time=req.getParameter("time");
         try {
-            ScheduleInfo info = new ScheduleInfo(-9999, ProgramConfig.TASK_TYPE_X,CronExpHelper.format(date,time));
+            ScheduleInfo info = new ScheduleInfo(-9999, ProgramConfig.TASK_TYPE_PDF,CronExpHelper.format(date,time));
 
             if(!ScheduleManager.engine().isTaskPlanExsit(info)){
                 ScheduleResult result = ScheduleManager.engine().lauchTask(info);

@@ -5,7 +5,7 @@ import com.ljq.common.ConstantKey;
 import com.ljq.common.ProgramConfig;
 import com.ljq.gateway.SendFileResult;
 import com.ljq.queue.FileEntity;
-import com.ljq.transer.iml.XTaskInfoCreator;
+import com.ljq.transer.iml.PdfTaskInfoCreator;
 import com.ljq.transer.iml.YTaskInfoCreator;
 import com.ljq.util.FileTypeHelper;
 import org.apache.commons.logging.Log;
@@ -46,7 +46,7 @@ public class FileHelper {
      * 初始化固定的文件参数创建器
      */
     public static void init() {
-        FileHelper.registerTaskInfoCreator(ProgramConfig.TASK_TYPE_X, new XTaskInfoCreator());
+        FileHelper.registerTaskInfoCreator(ProgramConfig.TASK_TYPE_PDF, new PdfTaskInfoCreator());
         FileHelper.registerTaskInfoCreator(ProgramConfig.TASK_TYPE_Y, new YTaskInfoCreator());
     }
 
@@ -80,7 +80,7 @@ public class FileHelper {
                 .build(reader);
         SqlSession session = sessionFactory.openSession();
 
-        if (taskType == ProgramConfig.TASK_TYPE_X) {
+        if (taskType == ProgramConfig.TASK_TYPE_PDF) {
 
             String[] str = FileHelper.fileReader(dataFilePath);
 
