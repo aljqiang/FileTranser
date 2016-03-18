@@ -1,5 +1,6 @@
 package com.ljq.transer;
 
+import com.ljq.LoggerDao.model.Tfilelog;
 import com.ljq.common.ConstantKey;
 import com.ljq.common.ProgramConfig;
 import com.ljq.gateway.SendFileResult;
@@ -9,6 +10,10 @@ import com.ljq.transer.iml.YTaskInfoCreator;
 import com.ljq.util.FileTypeHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.*;
 import java.text.DecimalFormat;
@@ -61,12 +66,19 @@ public class FileHelper {
      * @param dataFilePath
      * @return
      */
-    public static FileTaskInfo createTaskInfo(int taskType, String dataFilePath,SendFileResult sendResult) {
+    public static FileTaskInfo createTaskInfo(int taskType, String dataFilePath,SendFileResult sendResult) throws IOException {
 
         // 获取文件参数
         FileTaskInfo taskInfo = null;
 
         FileEntity fileEntity=new FileEntity();
+
+        // 初始化数据库连接
+        String resource = "/com/ljq/LoggerDao/mybatis-config.xml";
+        Reader reader = Resources.getResourceAsReader(resource);
+        SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder()
+                .build(reader);
+        SqlSession session = sessionFactory.openSession();
 
         if (taskType == ProgramConfig.TASK_TYPE_X) {
 
@@ -124,6 +136,22 @@ public class FileHelper {
                         log.debug("转移数据文件:[" + dataFile.getAbsolutePath() + "]失败");
                         log.debug(sendResult.getMsg());
                     }else{
+                        // 数据库日记记录
+                        try{
+                            Tfilelog tfilelog=new Tfilelog();
+
+                            tfilelog.setKhh(fileEntity.getKhh());
+                            tfilelog.setRq(fileEntity.getRq());
+                            tfilelog.setWjlj(taskInfo.getSrcDir() + taskInfo.getSrcFile() + "_" + numFmt.format(seqNum) + ".pdf");
+                            tfilelog.setBz("");
+
+                            session.insert("com.ljq.LoggerDao.mapping.TfilelogMapper.insertFilelog", tfilelog);
+                            session.commit();
+                            log.info("写入数据库日志信息成功!");
+                        }catch (Exception e){
+                            log.error("写入数据库日志信息出错，错误为:"+e);
+                        }
+
                         sendResult.setSuccess(true);
                         sendResult.setType("Transer传输");
                     }
@@ -134,6 +162,8 @@ public class FileHelper {
 
             taskInfo.setSrcFiles(fileName);
             taskInfo.setAimFiles(fileName);
+
+            session.close();
         } else if (taskType == ProgramConfig.TASK_TYPE_Y) {
             File dataFile = new File(dataFilePath);
             File destFile = new File(taskInfo.getSrcDir() + taskInfo.getSrcFile());

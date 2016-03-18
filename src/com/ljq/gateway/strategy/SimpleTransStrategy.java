@@ -12,6 +12,8 @@ import com.ljq.transer.FileTaskInfo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.io.IOException;
+
 /**
  * 传输策略
  * User: Larry
@@ -32,7 +34,7 @@ public class SimpleTransStrategy implements ITransStrategy {
     }
 
     @Override
-    public synchronized SendFileResult sendDatafile(SendTaskEntity entity) { // 如果发送文件是同一个文件，加同步锁防止资源抢占，不加同步锁则多线程同步作业，会出现资源抢占问题
+    public synchronized SendFileResult sendDatafile(SendTaskEntity entity) throws IOException { // 如果发送文件是同一个文件，加同步锁防止资源抢占，不加同步锁则多线程同步作业，会出现资源抢占问题
         //初始化发送结果
         SendFileResult sendResult = new SendFileResult();
 

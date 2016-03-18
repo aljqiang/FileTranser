@@ -3,6 +3,8 @@ package com.ljq.core;
 import com.ljq.gateway.SendFileResult;
 import com.ljq.queue.SendTaskEntity;
 
+import java.io.IOException;
+
 /**
  * 通讯策略接口
  * User: Larry
@@ -17,7 +19,7 @@ public interface ITransStrategy {
      * @param entity
      * @return
      */
-    public SendFileResult sendDatafile(SendTaskEntity entity);
+    public SendFileResult sendDatafile(SendTaskEntity entity) throws IOException;
 
     /**
      * 传输结束后的释放资源

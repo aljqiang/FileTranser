@@ -5,8 +5,8 @@
 <mapper namespace="com.ljq.LoggerDao.mapping.TfilelogMapper">
     <!-- 记录文件迁移日志-->
     <insert id="insertFilelog" parameterType="Map">
-        insert into t_filelog(xh,khh,rq,wjlj,bz)
-        values(#{xh},#{khh},#{rq},#{wjlj},#{bz})
+        insert into t_filelog(khh,rq,wjlj,bz)
+        values(#{khh},#{rq},#{wjlj},#{bz})
     </insert>
 
 

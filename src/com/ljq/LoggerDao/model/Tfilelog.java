@@ -10,7 +10,7 @@ package com.ljq.LoggerDao.model;
 public class Tfilelog {
     private Integer xh;
 
-    private Integer khh;
+    private String khh;
 
     private String rq;
 
@@ -24,14 +24,6 @@ public class Tfilelog {
 
     public void setXh(Integer xh) {
         this.xh = xh;
-    }
-
-    public Integer getKhh() {
-        return khh;
-    }
-
-    public void setKhh(Integer khh) {
-        this.khh = khh;
     }
 
     public String getRq() {
@@ -56,5 +48,13 @@ public class Tfilelog {
 
     public void setBz(String bz) {
         this.bz = bz;
+    }
+
+    public String getKhh() {
+        return khh;
+    }
+
+    public void setKhh(String khh) {
+        this.khh = khh;
     }
 }
