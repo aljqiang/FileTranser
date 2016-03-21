@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
 /**
+ * 程序初始化入口
  * User: Larry
  * Date: 2015-03-30
  * Time: 16:33
@@ -61,7 +62,7 @@ public class AppInit extends HttpServlet{
 //        ScheduleManager.engine().lauchTask(new ScheduleInfo(-999, ProgramConfig.TASK_TYPE_CLEAN, "0 06 17 * * ? *"));
 
         // 初始化定时文件迁移作业
-        ScheduleManager.engine().lauchTask(new ScheduleInfo(999, ProgramConfig.TASK_TYPE_PDF, "0 25 15 * * ? *"));
+        ScheduleManager.engine().lauchTask(new ScheduleInfo(999, ProgramConfig.TASK_TYPE_PDF, "0 30 09 * * ? *"));
 
         super.init();
 
