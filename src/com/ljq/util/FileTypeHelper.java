@@ -29,7 +29,7 @@ public class FileTypeHelper {
     }
 
     static {
-        getAllFileType();  //初始化文件类型信息
+        getAllFileType();  // 初始化文件类型信息
     }
 
     /**

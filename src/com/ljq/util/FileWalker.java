@@ -54,11 +54,11 @@ public class FileWalker {
 		public void folderOperation(File folder);
 	}
 	
-	//扫描基础目录
+	// 扫描基础目录
 	private String baseFilePath;
-	//扫描目标特征辨别器
+	// 扫描目标特征辨别器
 	private IScanChecker scaner;
-	//扫描到目标处理器
+	// 扫描到目标处理器
 	private ICatchHandler handler;
 	
 	/**

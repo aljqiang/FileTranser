@@ -42,27 +42,27 @@ public class TranserScheduleMonitor extends Thread{
     public void run(){
         while(true)
         {
-            //初始化参数
+            // 初始化参数
             TranserScheduler scheduler;
             boolean canStart = false;
             boolean canSleep = true;
-            //判断是否运行任务线程大于最大执行量
+            // 判断是否运行任务线程大于最大执行量
             synchronized(running_cnt){
                 if(running_cnt<=MAX_RUNNING_SCHEDULER){
                     canStart = true;
                     canSleep = false;
                 }
             }
-            //从调度队列获取执行任务
+            // 从调度队列获取执行任务
             if(canStart){
                 scheduler = ScheduleManager.popScheduler();
                 if(null == scheduler)
                     canSleep = true;
                 if(!canSleep)
-                    //添加到任务运行池
+                    // 添加到任务运行池
                     ScheduleManager.addRunningPool(scheduler);
             }
-            //判断是否休眠
+            // 判断是否休眠
             if(canSleep)
                 try{
                     sleep(1000);

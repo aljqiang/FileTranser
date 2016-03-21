@@ -60,9 +60,9 @@ public class TranserScheduler extends Thread{
             handler.handle(info);
             log.info("结束执行任务ID为:"+info.getTask_id()+",类型为:"+info.getTask_type()+"任务..");
         }finally{
-            //更改结束状态
+            // 更改结束状态
             this.dead = true;
-            //通知监控器当前任务已经完成
+            // 通知监控器当前任务已经完成
             this.monitor.notifyMonitor(getInfo());
         }
     }

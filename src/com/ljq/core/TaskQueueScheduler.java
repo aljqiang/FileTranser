@@ -60,7 +60,7 @@ public class TaskQueueScheduler extends Thread {
                 continue;
             }
 
-            //轮询休眠
+            // 轮询休眠
             try {
                 Thread.sleep(((int)(send_loop_delay*1000)));
             } catch (InterruptedException e) {

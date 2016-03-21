@@ -34,13 +34,13 @@ public class YTaskInfoCreator extends ACreateTaskInfo {
     @Override
     public FileTaskInfo createTaskInfo(FileEntity fileEntity) {
         FileTaskInfo info = new FileTaskInfo();
-        //创建当前日期标识
+        // 创建当前日期标识
         String dateStr = this.dateFmt.format(new Date());
-        //构造源系统发送路径
+        // 构造源系统发送路径
         String srcDir = ProgramConfig.Y.getProperty(ConstantKey.transer_send_dir, "Z:/aimDir/Y/save/") +
                 ProgramConfig.Y.getProperty(ConstantKey.transer_task_seq, "90002") + "/" +
                 dateStr + "/";
-        //判断是否需要创建发送目录
+        // 判断是否需要创建发送目录
         synchronized(this.dateFmt){
             File srcDirFolder = new File(srcDir);
             if(!srcDirFolder.exists())
@@ -48,12 +48,12 @@ public class YTaskInfoCreator extends ACreateTaskInfo {
             this.dateFmt.notifyAll();
         }
         info.setSrcDir(srcDir);
-        //构造目标系统接收路径
+        // 构造目标系统接收路径
         String aimDir = ProgramConfig.Y.getProperty(ConstantKey.transer_save_dir, "Z:/aimDir/Y/save/") +
                 ProgramConfig.Y.getProperty(ConstantKey.transer_task_seq, "90002") + "/" +
                 dateStr + "/";
         info.setAimDir(aimDir);
-        //构造源系统发送文件名
+        // 构造源系统发送文件名
         synchronized(this.numFmt){
             if(this.seqNum >= this.MAX_SEQ_NUM)
                 this.seqNum = 0;

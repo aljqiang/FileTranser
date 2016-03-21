@@ -83,7 +83,7 @@ public class DataFileCleanHandler implements ITaskHandler {
 		
 		@Override
 		public boolean checkFile(File aimFile) {
-			//不识别文件名
+			// 不识别文件名
 			return false;
 		}
 

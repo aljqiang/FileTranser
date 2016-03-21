@@ -70,7 +70,7 @@ public class QuartzScheduleEngine implements IScheduleEngine{
 
     @Override
     public ScheduleResult cancelTaskPlan(ScheduleInfo info) {
-        //检测Quartz的调度池是否存在该任务
+        // 检测Quartz的调度池是否存在该任务
         Scheduler scheduler = null;
         try {
             scheduler = sf.getScheduler();
@@ -79,12 +79,12 @@ public class QuartzScheduleEngine implements IScheduleEngine{
             return new ScheduleResult("获取Quartz调度器失败:"+e.getMessage());
         }
         ScheduleResult result = new ScheduleResult();
-        //先查执行任务池是否存在对应任务,是则中断线程返回取消任务成功
+        // 先查执行任务池是否存在对应任务,是则中断线程返回取消任务成功
         if(ScheduleManager.interruptRunningTask(info))
             return result;
-        //Quartz标识
+        // Quartz标识
         String key = info.getTask_id()+"";
-        //取消Quartz内调度线程
+        // 取消Quartz内调度线程
         try {
             scheduler.pauseJob(new JobKey(key, Scheduler.DEFAULT_GROUP));
         } catch (SchedulerException e) {
@@ -103,14 +103,14 @@ public class QuartzScheduleEngine implements IScheduleEngine{
             log.error("删除标识为:["+key+"]的QuatzJob失败");
             result.setCause("删除标识为:["+key+"]的QuatzJob失败:"+e.getMessage());
         }
-        //输出信息
+        // 输出信息
         if(result.isSucc())
             log.info("删除标识为:["+key+"]的任务计划成功");
 
         // 移除定时调度任务任务
         QuartzScheduleInfoMap.removeQS(info.getTask_id());
 
-        //返回结果
+        // 返回结果
         return result;
     }
 

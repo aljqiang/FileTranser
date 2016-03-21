@@ -88,7 +88,7 @@ public class SendTaskWorker extends Thread {
             // 日志记录
             log.debug(ex.getMessage(),ex);
         }finally{
-            //最后释放资源
+            // 最后释放资源
             this.release();
         }
 

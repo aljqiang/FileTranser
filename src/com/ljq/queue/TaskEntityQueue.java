@@ -28,7 +28,7 @@ public class TaskEntityQueue {
     }
 
     /**
-     * 获取X任务队列
+     * 获取结单任务队列任务队列
      * @return
      */
     public BlockQueue<SendTaskEntity> pdfTaskQueue(){
