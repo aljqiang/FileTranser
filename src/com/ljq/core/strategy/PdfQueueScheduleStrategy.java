@@ -8,7 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * X调度策略
+ * 结单文件传输调度策略
  * User: Larry
  * Date: 2015-03-30
  * Time: 15:21
