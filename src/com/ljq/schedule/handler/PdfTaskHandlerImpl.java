@@ -36,12 +36,15 @@ public class PdfTaskHandlerImpl implements ITaskHandler {
         String dataFilePath = ProgramConfig.PDF.getProperty(ConstantKey.transer_send_dir, "Z:/file_jd/") + dateStr + "/";
 
         File file = new File(dataFilePath);
-        if (file.isDirectory()) {
+        if (file.isDirectory() && file.exists()) {
             String[] files = file.list();
             if (files.length < 2) {
-                log.info("源系统文件路径:["+dataFilePath+"]无结单文件!");
+                log.info("目标系统文件路径:["+dataFilePath+"]无结单文件!");
                 return;
             }
+        }else {
+            log.info("目标系统文件路径:["+dataFilePath+"]不存在!");
+            return;
         }
 
         if (!TestReciveOrderServlet.checkOrderType(orderType)) {
